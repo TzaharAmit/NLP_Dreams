@@ -1,6 +1,6 @@
 # Dream Interpretation using LLMs
 
-![our project!](./project_desc.png)
+![our project!](./project_desc3.PNG)
 
 ## Introduction
 This project explores the use of NLP models for interpreting dreams based on 2 datasets of dreams descriptions. 
