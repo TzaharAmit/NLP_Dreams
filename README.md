@@ -10,23 +10,20 @@ This project aims to build an AI dream interpretor by leveraging LLMs trained on
 - **Automated Evaluation**: Performance comparison using **BLEU, ROUGE, BERTScore, and Perplexity**.
 - **Test and Validation Analysis**: Insights about how well the models generalize to unseen dream data.
 
----
-
 ## Dependencies
-  - Python > 3.6
-  - Pandas 
-  - NumPy 
-  - Regular Expressions (re) 
-  - Datetime 
-  - Scikit-learn 
-  - Hugging Face Transformers (pip install transformers)
-  - Datasets (pip install datasets)
-  - PyTorch 
-  - NLTK 
-  - OpenCV 
-  - pytorch-gan-metrics 
-  - CUDA (Optional) for faster training on NVIDIA GPU
----
+  Python > 3.6
+  Pandas 
+  NumPy 
+  Regular Expressions (re) 
+  Datetime 
+  Scikit-learn 
+  Hugging Face Transformers (pip install transformers)
+  Datasets (pip install datasets)
+  PyTorch 
+  NLTK 
+  OpenCV 
+  pytorch-gan-metrics 
+  CUDA (Optional) for faster training on NVIDIA GPU
 
 ## Implementation
 
