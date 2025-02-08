@@ -1,16 +1,20 @@
 # Dream Interpretation using GPT-2 and T5
 
 ## Introduction
-This project explores the use of NLP models for interpreting dreams based on 2 datasets of dreams descriptions. The goal is to analyze and compare the effectiveness of 4 models in generating dream interpretations.
-This project aims to build an AI dream interpretor by leveraging LLMs trained on dream datasets.
+This project explores the use of NLP models for interpreting dreams based on 2 datasets of dreams descriptions. 
+It aims to build an AI dream interpretor by leveraging LLMs trained on dream datasets.
 
-**Key Features:**
-- **GPT-2 and T5 Models**: Two transformer models trained to generate dream interpretations.
-- **Add other models**
-- **Automated Evaluation**: Performance comparison using **BLEU, ROUGE, BERTScore, and Perplexity**.
-- **Test and Validation Analysis**: Insights about how well the models generalize to unseen dream data.
+**The project has two parts:**
+
+**Part 1** is based on the article: Our Dreams, Our Selves: Automatic Interpretation of Dream Reports.
+It uses the data to create 2 LLMs that are dreams interpeators.
+
+**Part 2** is based on.... *ADD*
+The resulted 4 models are tested on validtaion dataset of 50 dreams and their interpretations according Freud.
+The goal is to analyze and compare the effectiveness of 4 models in generating dream interpretations.
 
 ## Dependencies
+  ```plaintext
   Python > 3.6
   Pandas 
   NumPy 
@@ -18,41 +22,35 @@ This project aims to build an AI dream interpretor by leveraging LLMs trained on
   Datetime 
   Scikit-learn 
   Hugging Face Transformers (pip install transformers)
-  Datasets (pip install datasets)
-  PyTorch 
+  Datasets 
+  PyTorch >= 1.0
   NLTK 
   OpenCV 
   pytorch-gan-metrics 
   CUDA (Optional) for faster training on NVIDIA GPU
+  ```
 
-## Implementation
+## Implementation: Part 1:
 
 ### **1. Download the Dataset**
 The dream dataset used in this project is available on **Dryad**:  
-🔗 [Dataset Link](https://datadryad.org/stash/dataset/doi:10.5061/dryad.qbzkh18fr)
-
-After downloading, preprocess the dataset to prepare it for training.
-
----
+[Dataset Link](https://datadryad.org/stash/dataset/doi:10.5061/dryad.qbzkh18fr)
 
 ### **2. Train the Models**
 Train GPT-2 and T5 models using the preprocessed dataset:
 
 ```bash
-python train.py --model gpt2 --epochs 10
-python train.py --model t5 --epochs 10
+python gpt2_train.py
+python t5_train.py 
 ```
 
-This will fine-tune the models on dream interpretation data.
+This will fine-tune the models on the dreams dataset.
 
----
 
 ### **3. Evaluate the Models**
-Run the evaluation script to compare model performance:
+Extract test and validation results created compare model performance:
 
-```bash
-python evaluate.py --test_dataset test_data.json
-```
+evaluation_metrics.json
 
 Metrics used:
 - **BLEU Score** (Measures similarity to reference interpretations)
@@ -60,7 +58,6 @@ Metrics used:
 - **BERTScore** (Semantic similarity)
 - **Perplexity** (Measures model confidence)
 
----
 
 ## **Results**
 
@@ -74,12 +71,18 @@ Metrics used:
 | **Perplexity**      | 1.334e11 | 1.0665 |
 | **BERTScore (F1)** | 0.7913 | 0.9537 |
 
-📌 **Conclusion:**  
-- **T5 outperforms GPT-2 significantly** in accuracy and fluency.
-- **Lower Perplexity in T5** means it generates more confident interpretations.
+**Conclusions: Test Dataset**  
+- T5 outperforms GPT-2 significantly in accuracy and fluency.
+- Lower Perplexity in T5 means it generates more confident interpretations.
 
 ---
+## Implementation: Part 2:
 
+
+
+
+
+--
 ### **Validation Dataset Performance**
 | Metric               | GPT-2  | T5    |
 |----------------------|--------|-------|
