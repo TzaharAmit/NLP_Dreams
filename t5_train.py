@@ -1,13 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Sat Feb  1 11:05:26 2025
-
-@author: linuxu
+# NLP Final Project: Task 3: Dreams
 """
 import pandas as pd
-# from google.colab import drive
-# drive.mount('/content/drive')
 import numpy as np
 import re
 from datetime import datetime
@@ -17,6 +11,11 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration, TrainingArgume
 from datasets import Dataset
 import torch
 import json
+import nltk
+from rouge_score import rouge_scorer
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from evaluate import load
+from prettytable import PrettyTable
 
 """## Dataset 1: Our Dreams, Our Selves: Automatic Interpretation of Dream Reports"""
 
@@ -39,7 +38,6 @@ This dream contains significant themes:
 """
 
 # Step 2: Preprocessing Dataset
-
 def clean_date(date_str):
     """Clean and normalize the dream_date field."""
     try:
@@ -49,8 +47,6 @@ def clean_date(date_str):
 
 # Clean and normalize dream_date
 data['clean_dream_date'] = data['dream_date'].apply(clean_date)
-
-# Handle missing or invalid dream_date values
 data['clean_dream_date'] = data['clean_dream_date'].fillna(pd.Timestamp('1900-01-01'))
 
 # Tokenization and Text Cleaning for text_dream
@@ -59,7 +55,6 @@ def clean_text(text):
     text = re.sub(r'[\n\r]', ' ', str(text))
     text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
     return text.strip().lower()
-
 data['clean_text_dream'] = data['text_dream'].apply(clean_text)
 
 # Normalize Numeric Features (Standard Scaling)
@@ -76,14 +71,12 @@ le_language = LabelEncoder()
 data['encoded_dreamer'] = le_dreamer.fit_transform(data['dreamer'])
 data['encoded_language'] = le_language.fit_transform(data['dream_language'])
 
-# Handle Missing Data
-# Fill missing values with appropriate defaults
+# Fill missing values with defaults
 for col in numeric_features:
     data[col].fillna(0, inplace=True)
 data['clean_text_dream'].fillna("unknown", inplace=True)
 
 # Step 3: Feature Engineering
-
 def calculate_character_diversity(row):
     """Calculate character diversity based on character percentages."""
     return row[['Male', 'Animal', 'Friends', 'Family', 'Dead&Imaginary']].std()
@@ -101,16 +94,12 @@ def generate_interpretation(row):
     """Generate a detailed interpretation for a given dream using HVC codes."""
     # Repressed Desires
     repressed_desires = "High" if row['NegativeEmotions'] > 0.5 else "Low"
-
     # Conflicts
     conflicts = "Significant" if row['Aggression/Friendliness'] > 1 else "Minimal"
-
     # Symbols
     symbols = "Complex" if row['character_diversity'] > 0.5 else "Simple"
-
     # Emotional Tone
     emotional_tone = "Negative" if row['NegativeEmotions'] > 0.5 else "Positive"
-
     # Character Summary
     prominent_characters = []
     if row['Male'] > 0.3:
@@ -120,13 +109,10 @@ def generate_interpretation(row):
     if row['Family'] > 0.2:
         prominent_characters.append("family members")
     character_summary = "The dream prominently features " + ", ".join(prominent_characters) + "."
-
     # Interaction Summary
     interaction_summary = f"The dream contains an aggression-to-friendliness ratio of {row['Aggression/Friendliness']:.2f} and sexual interactions are {'present' if row['S/CIndex'] > 0 else 'absent'}."
-
     # Emotional Summary
     emotion_summary = f"The dream reflects {'strong negative emotions' if row['NegativeEmotions'] > 0.5 else 'mild emotions'}, indicating {('anxiety or conflict' if row['NegativeEmotions'] > 0.5 else 'a peaceful state')}."
-
     # Freudian Insight (Dynamic Logic)
     if row['Aggression/Friendliness'] > 1.5:
         if row['NegativeEmotions'] > 0.5:
@@ -141,7 +127,6 @@ def generate_interpretation(row):
         freudian_insight = "The presence of animals symbolizes primal instincts or untamed emotions."
     else:
         freudian_insight = "This dream reflects a balance of inner thoughts and social dynamics."
-
     row['freudian_insight'] = freudian_insight
 
     return interpretation_template.format(
@@ -158,34 +143,24 @@ def generate_interpretation(row):
 data['synthetic_interpretation'] = data.apply(generate_interpretation, axis=1)
 data['freudian_insight'] = data['synthetic_interpretation'].apply(lambda x: x.split('**Freudian Insight**: ')[1].split('\n')[0] if '**Freudian Insight**:' in x else '')
 
-data['synthetic_interpretation'].value_counts()
-data['freudian_insight'].value_counts()
-
-
 # Prepare the dataset for training
 dataset = Dataset.from_pandas(data[['clean_text_dream', 'synthetic_interpretation']])
 # Set the model name for T5 Small
 model_name = "t5-small" 
 tokenizer = T5Tokenizer.from_pretrained(model_name)
-
-
-# Set the padding token
 if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token
 
 # Tokenize the data
 def preprocess(examples):
     return tokenizer(examples['clean_text_dream'], text_target=examples['synthetic_interpretation'], truncation=True, padding="max_length", max_length=512)
-
 tokenized_dataset = dataset.map(preprocess, batched=True)
-
 
 def preprocess(examples):
     return tokenizer(examples['clean_text_dream'], text_target=examples['synthetic_interpretation'], truncation=True, padding="max_length", max_length=512)
 
 tokenized_dataset = dataset.map(preprocess, batched=True)
 print("tokenized dataset")
-
 
 # Split the dataset
 train_test_split = tokenized_dataset.train_test_split(test_size=0.1)
@@ -197,9 +172,6 @@ test_dataset.to_csv(r'./dream_llm/test_dataset.csv')
 
 # Load the T5 model and tokenizer
 model = T5ForConditionalGeneration.from_pretrained(model_name)
-
-# Print the model type
-print("T5 model loaded")
 
 # Define training arguments
 training_args = TrainingArguments(
@@ -222,19 +194,16 @@ trainer = Trainer(
     eval_dataset=test_dataset,
     tokenizer=tokenizer
 )
-
 print("Training started")
 
 # Fine-tune the model
 trainer.train()
-
 # Save the fine-tuned model
 model.save_pretrained("./dream_llm")
 tokenizer.save_pretrained("./dream_llm")
 
-#print("Model fine-tuned and saved to './dream_llm'")
 
-# Load model after train:
+# Load model after train: in case you want to use the saved model:
 # model_path = "./dream_llm"
 # tokenizer = AutoTokenizer.from_pretrained(model_path)
 # model = AutoModelForCausalLM.from_pretrained(model_path)
@@ -245,14 +214,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)
 model.eval()
 
-
 # evaluate test dataset
-import nltk
-from rouge_score import rouge_scorer
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from evaluate import load
-import numpy as np
-
 # Prepare metrics
 nltk.download("punkt_tab")
 bleu_scorer = nltk.translate.bleu_score
@@ -273,24 +235,11 @@ def calculate_perplexity(predictions, tokenizer):
 # Generate predictions and evaluate
 references = [example["synthetic_interpretation"] for example in test_dataset]
 predictions = []
-
-# for example in test_dataset:
-#     input_text = example["clean_text_dream"]
-#     inputs = tokenizer(input_text, return_tensors="pt", truncation=True, padding=True)
-#     outputs = model.generate(inputs.input_ids.cuda(), max_new_tokens=200, num_return_sequences=1)
-#     pred = tokenizer.decode(outputs[0], skip_special_tokens=True)
-#     predictions.append(pred)
     
 for example in test_dataset:
     input_text = example["clean_text_dream"]
-    
-    # Move inputs to GPU
     inputs = tokenizer(input_text, return_tensors="pt", truncation=True, padding=True).to(device)
-
-    # Generate text with GPU-optimized processing
     outputs = model.generate(inputs.input_ids, max_new_tokens=200, num_return_sequences=1)
-
-    # Decode and store predictions
     pred = tokenizer.decode(outputs[0], skip_special_tokens=True)
     predictions.append(pred)
 
@@ -323,7 +272,6 @@ bert_score_result = bert_score.compute(predictions=predictions, references=refer
 bert_avg = np.mean(bert_score_result["f1"])
 print(f"BERTScore (F1): {bert_avg:.4f}")
 
-
 all_results = {"Average BLEU Score": f"{bleu_avg:.4f}",
                "ROUGE-1": f"{rouge1/n:.4f}, ROUGE-2: {rouge2/n:.4f}, ROUGE-L: {rougeL/n:.4f}",
                "Perplexity": f"{perplexity:.4f}",
@@ -334,8 +282,7 @@ with open(filename, "w") as f:
     json.dump(all_results, f, indent=4)
 print(f"Evaluation metrics saved to {filename}")
 
-#%%
-from prettytable import PrettyTable
+#%% Model Size:
 def count_parameters(model):
     table = PrettyTable(["Modules", "Parameters"])
     total_params = 0
@@ -351,7 +298,7 @@ def count_parameters(model):
 
 count_parameters(model)
 
-#%%
+#%% Validation:
 
 dreams_data = {
     "dream": [
@@ -427,23 +374,19 @@ dreams_df = pd.DataFrame(dreams_data)
 # Prepare the dream descriptions for testing
 test_dreams = dreams_df["dream"].tolist()
 actual_interpretations = dreams_df["interp"].tolist()
-
 # Generate predictions using the fine-tuned model
 generated_interpretations = []
 
 for dream in test_dreams:
     # Tokenize the input text
     inputs = tokenizer(dream, return_tensors="pt", truncation=True, padding=True).to(device)
-    
     # Generate the prediction
     outputs = model.generate(inputs.input_ids, max_new_tokens=200, num_return_sequences=1)
-    
     # Decode the prediction
     pred = tokenizer.decode(outputs[0], skip_special_tokens=True)
     generated_interpretations.append(pred)
 
 # Evaluate the results using ROUGE, BLEU, and other metrics
-
 # BLEU Score
 bleu_scores = []
 for ref, pred in zip(actual_interpretations, generated_interpretations):
