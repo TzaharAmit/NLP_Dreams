@@ -13,21 +13,19 @@ This project aims to build an AI dream interpretor by leveraging LLMs trained on
 ---
 
 ## Dependencies
-Ensure the following dependencies are installed before running the code:
-
-- Python > 3.6
-- Pandas 
-- NumPy 
-- Regular Expressions (re) 
-- Datetime 
-- Scikit-learn 
-- Hugging Face Transformers (pip install transformers)
-- Datasets (pip install datasets)
-- PyTorch 
-- NLTK 
-- OpenCV 
-- pytorch-gan-metrics 
-- CUDA (Optional) for faster training on NVIDIA GPU
+  - Python > 3.6
+  - Pandas 
+  - NumPy 
+  - Regular Expressions (re) 
+  - Datetime 
+  - Scikit-learn 
+  - Hugging Face Transformers (pip install transformers)
+  - Datasets (pip install datasets)
+  - PyTorch 
+  - NLTK 
+  - OpenCV 
+  - pytorch-gan-metrics 
+  - CUDA (Optional) for faster training on NVIDIA GPU
 ---
 
 ## Implementation
