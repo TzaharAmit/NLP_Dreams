@@ -1,4 +1,6 @@
-# Dream Interpretation using GPT-2 and T5
+# Dream Interpretation using LLMs
+
+![our project!](./project_desc.png)
 
 ## Introduction
 This project explores the use of NLP models for interpreting dreams based on 2 datasets of dreams descriptions. 
