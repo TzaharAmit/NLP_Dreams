@@ -9,7 +9,9 @@ It aims to build an AI dream interpretor by leveraging LLMs trained on dream dat
 **Part 1** is based on the article: Our Dreams, Our Selves: Automatic Interpretation of Dream Reports.
 It uses the data to create 2 LLMs that are dreams interpeators.
 
-**Part 2** is based on.... *ADD*
+**Part 2** is based on.... 
+###**ADD**
+
 The resulted 4 models are tested on validtaion dataset of 50 dreams and their interpretations according Freud.
 The goal is to analyze and compare the effectiveness of 4 models in generating dream interpretations.
 
@@ -78,38 +80,26 @@ Metrics used:
 ---
 ## Implementation: Part 2:
 
+# **ADD**
 
 
 
-
---
-### **Validation Dataset Performance**
+---
+### **Validation Dataset Performance: All Models**
 | Metric               | GPT-2  | T5    |
 |----------------------|--------|-------|
-| **BLEU Score**      | 0.0000 | 0.0000 |
+| **BLEU Score**      | 0 | 0 |
 | **ROUGE-1**        | 0.0333 | 0.0626 |
 | **ROUGE-2**        | 0.0000 | 0.0036 |
 | **ROUGE-L**        | 0.0287 | 0.0518 |
 | **Perplexity**      | 1.0974 | 1.0639e6 |
 | **BERTScore (F1)** | 0.7897 | 0.7984 |
 
-📌 **Key Takeaways:**  
-- **Performance drops significantly on validation data**, suggesting **overfitting** or challenges in dream interpretation generalization.
+**Final Conclusions:**  
+- **Performance drops significantly on validation data**, This is because the validation data is very different from the training and test datasets. While the training data contains only dreams without interpretations (and interpretations were generated manually during training), the validation data is based on interpretations according to Freud. This discrepancy makes it harder for the models to generalize effectively.
 - **T5 still performs better than GPT-2**, but the gap is smaller.
 
----
-
-## **Visualizations**
-The following plots illustrate the comparative performance of the two models:
-
-![Performance Comparison](results/performance_comparison.png)
-
----
-
-## **Next Steps & Future Improvements**
-- **Data Augmentation**: Improve generalization with **more diverse dream datasets**.
-- **Fine-tuning with Larger Models**: Explore **T5-large** or **GPT-3** for better results.
-- **Hybrid Approach**: Combine GPT-2’s fluency with T5’s accuracy for enhanced performance.
+  # ADD 2 Models
 
 ---
 
@@ -125,14 +115,4 @@ If you use this project, please cite the original dataset:
 }
 ```
 
----
 
-## **Contact**
-For any issues or inquiries, feel free to open an issue or reach out via **GitHub Discussions**.
-
----
-
-## **Acknowledgments**
-Special thanks to the authors of the original dataset and the open-source contributors of **Hugging Face Transformers**.
-
-🚀 **Happy Dream Interpretation!**
