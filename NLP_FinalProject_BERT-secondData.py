@@ -20,7 +20,7 @@ from evaluate import load
 
 # Download necessary resources
 nltk.download('punkt')
-
+nltk.download('punkt_tab')
 
 # Load the DREAM dataset for training
 def load_dream_dataset(file_path):
