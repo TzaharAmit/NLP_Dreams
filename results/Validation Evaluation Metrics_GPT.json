@@ -1,0 +1,6 @@
+{
+  "Average BLEU Score": "0.5260"
+  "ROUGE-1":" 0.0887, ROUGE-2: 0.0071, ROUGE-L: 0.0865"
+  "Perplexity": "2338188.6695"
+  "BERTScore (F1)": "0.8744"
+}
