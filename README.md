@@ -78,26 +78,10 @@ Metrics used:
 - T5 outperforms GPT-2 significantly in accuracy and fluency.
 - Lower Perplexity in T5 means it generates more confident interpretations.
 
----
-## Implementation: Part 2:
 
 
 ---
-### **Validation Dataset Performance: All Models**
-| Metric               | GPT-2  | T5    |
-|----------------------|--------|-------|
-| **BLEU Score**      | 0 | 0 |
-| **ROUGE-1**        | 0.0333 | 0.0626 |
-| **ROUGE-2**        | 0.0000 | 0.0036 |
-| **ROUGE-L**        | 0.0287 | 0.0518 |
-| **Perplexity**      | 1.0974 | 1.0639e6 |
-| **BERTScore (F1)** | 0.7897 | 0.7984 |
-
-**Final Conclusions:**  
-- **Performance drops significantly on validation data**, This is because the validation data is very different from the training and test datasets. While the training data contains only dreams without interpretations (and interpretations were generated manually during training), the validation data is based on interpretations according to Freud. This discrepancy makes it harder for the models to generalize effectively.
-- **T5 still performs better than GPT-2**, but the gap is smaller.
-
-  # ADD 2 Models
+ ## Implementation: Part 2:
 
 ### **1. Download the Dataset**
 The dream dataset used in this project is available on **Dream**:  
@@ -140,11 +124,24 @@ Metrics used:
 - GPT-2 outperforms BERT in BLEU, ROUGE-1, ROUGE-2, and ROUGE-L, indicating better accuracy and relevance in generated interpretations.
 - The infinite Perplexity in BERT suggests instability in generation, while GPT-2's lower Perplexity reflects more confident outputs despite being high.
 
-## Implementation: Part 2:
-
 
 ---
 ### **Validation Dataset Performance: All Models**
+## Dataset 1:
+| Metric               | GPT-2  | T5    |
+|----------------------|--------|-------|
+| **BLEU Score**      | 0 | 0 |
+| **ROUGE-1**        | 0.0333 | 0.0626 |
+| **ROUGE-2**        | 0.0000 | 0.0036 |
+| **ROUGE-L**        | 0.0287 | 0.0518 |
+| **Perplexity**      | 1.0974 | 1.0639e6 |
+| **BERTScore (F1)** | 0.7897 | 0.7984 |
+
+**Final Conclusions:**  
+- **Performance drops significantly on validation data**, This is because the validation data is very different from the training and test datasets. While the training data contains only dreams without interpretations (and interpretations were generated manually during training), the validation data is based on interpretations according to Freud. This discrepancy makes it harder for the models to generalize effectively.
+- **T5 still performs better than GPT-2**, but the gap is smaller.
+  
+## Dataset 2:
 | Metric               | GPT-2  | BERT    |
 |----------------------|--------|-------|
 | **BLEU Score**      | 0.5260 | 0.5428 |
