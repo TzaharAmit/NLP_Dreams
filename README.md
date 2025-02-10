@@ -11,8 +11,7 @@ It aims to build an AI dream interpretor by leveraging LLMs trained on dream dat
 **Part 1** is based on the article: Our Dreams, Our Selves: Automatic Interpretation of Dream Reports.
 It uses the data to create 2 LLMs that are dreams interpeators.
 
-**Part 2** is based on.... 
-###**ADD**
+**Part 2** is based on the article: "DREAM: A Challenge Dataset and Models for Dialogue-Based Reading Comprehension"
 
 The resulted 4 models are tested on validtaion dataset of 50 dreams and their interpretations according Freud.
 The goal is to analyze and compare the effectiveness of 4 models in generating dream interpretations.
@@ -82,9 +81,6 @@ Metrics used:
 ---
 ## Implementation: Part 2:
 
-# **ADD**
-
-
 
 ---
 ### **Validation Dataset Performance: All Models**
@@ -103,7 +99,63 @@ Metrics used:
 
   # ADD 2 Models
 
+### **1. Download the Dataset**
+The dream dataset used in this project is available on **Dream**:  
+[Dataset Link]([https://datadryad.org/stash/dataset/doi:10.5061/dryad.qbzkh18fr](https://dataset.org/dream/))
+
+### **2. Train the Models**
+Train GPT-2 and BERT models using the preprocessed dataset:
+
+```bash
+python NLP_FinalProject_BERT-secondData.py.py
+python NLP_FinalProject_GPT-secondData.py 
+```
+
+This will fine-tune the models on the dreams dataset.
+
+### **3. Evaluate the Models**
+Extract test and validation results created compare model performance:
+
+
+Metrics used:
+- **BLEU Score** (Measures similarity to reference interpretations)
+- **ROUGE Scores** (Measures n-gram overlap)
+- **BERTScore** (Semantic similarity)
+- **Perplexity** (Measures model confidence)
+
+
+## **Results**
+
+### **Test Dataset Performance**
+| Metric               | GPT-2  | BERT    |
+|----------------------|--------|-------|
+| **BLEU Score**      | 0.0499 | 0.0238 |
+| **ROUGE-1**        | 0.0316 | 0.0140 |
+| **ROUGE-2**        | 0.0031 | 0.0000 |
+| **ROUGE-L**        | 0.0316 | 0.0140 |
+| **Perplexity**      | 3575994.5969 | inf |
+| **BERTScore (F1)** | 0.8525 | 0.8536 |
+
+**Conclusions: Test Dataset**  
+- GPT-2 outperforms BERT in BLEU, ROUGE-1, ROUGE-2, and ROUGE-L, indicating better accuracy and relevance in generated interpretations.
+- The infinite Perplexity in BERT suggests instability in generation, while GPT-2's lower Perplexity reflects more confident outputs despite being high.
+
+## Implementation: Part 2:
+
+
 ---
+### **Validation Dataset Performance: All Models**
+| Metric               | GPT-2  | BERT    |
+|----------------------|--------|-------|
+| **BLEU Score**      | 0.5260 | 0.5428 |
+| **ROUGE-1**        | 0.0887 | 0.0092 |
+| **ROUGE-2**        | 0.0071 | 0.0000 |
+| **ROUGE-L**        | 0.0865 | 0.0092 |
+| **Perplexity**      | 2338188.6695 | inf |
+| **BERTScore (F1)** |0.8744 | 0.8654 |
+
+**Final Conclusions:**  
+GPT-2 consistently outperforms BERT in BLEU and ROUGE scores, indicating better accuracy and relevance in generated interpretations. While BERT shows instability with infinite Perplexity, GPT-2 demonstrates more reliable outputs despite its high Perplexity. Interestingly, BERT slightly outperforms GPT-2 in BERTScore (F1) on the test set, but GPT-2 leads on the validation set, reflecting better semantic alignment with Freud-based interpretations. Overall, both models experience a performance drop on the validation set due to its differences from the training data, which makes it harder for them to generalize effectively.
 
 ## **Citation**
 If you use this project, please cite the original dataset:
