@@ -1,6 +1,6 @@
-{
-  "Average BLEU Score": "0.5260"
-  "ROUGE-1":" 0.0887, ROUGE-2: 0.0071, ROUGE-L: 0.0865"
-  "Perplexity": "2338188.6695"
-  "BERTScore (F1)": "0.8744"
-}
+Average BLEU Score: 0.1933
+rouge1: 0.0343
+rouge2: 0.0018
+rougeL: 0.0312
+perplexity: 24.4091
+bert_score: 0.8246
