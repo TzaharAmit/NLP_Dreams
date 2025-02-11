@@ -1,1 +1,6 @@
-
+Average BLEU Score: 0.0033
+rouge1: 0.0375
+rouge2: 0.0035
+rougeL: 0.0327
+perplexity: 37.5101
+bert_score: 0.8275
