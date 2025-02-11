@@ -91,8 +91,8 @@ The dream dataset used in this project is available on **Dream**:
 Train GPT-2 and BERT models using the preprocessed dataset:
 
 ```bash
-python NLP_FinalProject_BERT-secondData.py.py
-python NLP_FinalProject_GPT-secondData.py 
+python NLP_FinalProject_MPT_2.py.py
+python NLP_FinalProject_GPT_2.py 
 ```
 
 This will fine-tune the models on the dreams dataset.
@@ -111,14 +111,14 @@ Metrics used:
 ## **Results**
 
 ### **Test Dataset Performance**
-| Metric               | GPT-2  | BERT    |
+| Metric               | GPT-2  | MPT    |
 |----------------------|--------|-------|
-| **BLEU Score**      | 0.0499 | 0.0238 |
-| **ROUGE-1**        | 0.0316 | 0.0140 |
-| **ROUGE-2**        | 0.0031 | 0.0000 |
-| **ROUGE-L**        | 0.0316 | 0.0140 |
-| **Perplexity**      | 3575994.5969 | inf |
-| **BERTScore (F1)** | 0.8525 | 0.8536 |
+| **BLEU Score**      | 0.0900 | 0.0238 |
+| **ROUGE-1**        | 0.0841 | 0.0140 |
+| **ROUGE-2**        | 0.0054 | 0.0000 |
+| **ROUGE-L**        | 0.0594 | 0.0140 |
+| **Perplexity**      | 162.9869 | inf |
+| **BERTScore (F1)** | 0.8243 | 0.8536 |
 
 **Conclusions: Test Dataset**  
 - GPT-2 outperforms BERT in BLEU, ROUGE-1, ROUGE-2, and ROUGE-L, indicating better accuracy and relevance in generated interpretations.
@@ -144,12 +144,12 @@ Metrics used:
 ## Dataset 2:
 | Metric               | GPT-2  | BERT    |
 |----------------------|--------|-------|
-| **BLEU Score**      | 0.5260 | 0.5428 |
-| **ROUGE-1**        | 0.0887 | 0.0092 |
-| **ROUGE-2**        | 0.0071 | 0.0000 |
-| **ROUGE-L**        | 0.0865 | 0.0092 |
-| **Perplexity**      | 2338188.6695 | inf |
-| **BERTScore (F1)** |0.8744 | 0.8654 |
+| **BLEU Score**      | 0.1933 | 0.5428 |
+| **ROUGE-1**        | 0.0343 | 0.0092 |
+| **ROUGE-2**        | 0.0018 | 0.0000 |
+| **ROUGE-L**        | 0.0312 | 0.0092 |
+| **Perplexity**      | 24.4091 | inf |
+| **BERTScore (F1)** | 0.8246 | 0.8654 |
 
 **Final Conclusions:**  
 GPT-2 consistently outperforms BERT in BLEU and ROUGE scores, indicating better accuracy and relevance in generated interpretations. While BERT shows instability with infinite Perplexity, GPT-2 demonstrates more reliable outputs despite its high Perplexity. Interestingly, BERT slightly outperforms GPT-2 in BERTScore (F1) on the test set, but GPT-2 leads on the validation set, reflecting better semantic alignment with Freud-based interpretations. Overall, both models experience a performance drop on the validation set due to its differences from the training data, which makes it harder for them to generalize effectively.
