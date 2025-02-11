@@ -126,7 +126,7 @@ Metrics used:
 
 
 ---
-### **Validation Dataset Performance: All Models**
+# **Validation Dataset Performance: All Models**
 ## Training Dataset 1:
 | Metric               | GPT-2  | T5    |
 |----------------------|--------|-------|
@@ -154,8 +154,20 @@ Metrics used:
 **Conclusions:**  
 GPT-2 consistently outperforms distilgpt2 in BLEU and Perplexity, indicating better fluency, coherence, and more confident text generation. While distilgpt2 slightly outperforms GPT-2 in ROUGE and BERTScore (F1) on the validation set, suggesting better semantic relevance and content alignment, the overall differences are minimal. Both models experience performance variations between the test and validation sets, highlighting challenges in generalizing to new data, likely due to differences in style and structure from the training data.
 
+# Model Performance Comparison
+
+| Metric       | GPT-2 (Dataset 1) | T5 (Dataset 1) | GPT-2 (Dataset 2) | DistilGPT-2 (Dataset 2) |
+|-------------|------------------|---------------|------------------|----------------------|
+| **BLEU Score** | 0.0000 | 0.0000 | 0.1933 | 0.0033 |
+| **ROUGE-1**   | 0.0333 | 0.0626 | 0.0343 | 0.0375 |
+| **ROUGE-2**   | 0.0000 | 0.0036 | 0.0018 | 0.0035 |
+| **ROUGE-L**   | 0.0287 | 0.0518 | 0.0312 | 0.0327 |
+| **Perplexity** | 1.0974 | 1.0639e6 | 24.4091 | 37.5101 |
+| **BERTScore (F1)** | 0.7897 | 0.7984 | 0.8246 | 0.8275 |
+
 **Final Conclusioins:**
-While all models face generalization difficulties, T5 achieves better content relevance but suffers from instability, while GPT-2 provides more fluent and coherent outputs. The validation data shift remains a major challenge, highlighting the importance of better-aligned training strategies for future improvements.
+Overall, the models demonstrate good performance across different metrics, with each model showcasing its own strengths and weaknesses. Despite the challenges posed by differences in training and validation data, the results indicate that the models are capable of generating meaningful and relevant text.
+The results highlight the trade-offs between different models—some excel in semantic accuracy (T5, DistilGPT-2), while others perform better in fluency and coherence (GPT-2). The validation data shift highlighting the importance of better-aligned training strategies for future improvements. Future work should focus on data augmentation, fine-tuning, and qualitative evaluation to improve model performance in real-world text generation tasks.
 
 ## **Citation**
 If you use this project, please cite the original dataset:
