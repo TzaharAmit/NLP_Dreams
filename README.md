@@ -91,7 +91,7 @@ The dream dataset used in this project is available on **Dream**:
 Train GPT-2 and BERT models using the preprocessed dataset:
 
 ```bash
-python NLP_FinalProject_distilgpt2_2.py.py
+python NLP_FinalProject_distilgpt2_2.py
 python NLP_FinalProject_GPT_2.py 
 ```
 
@@ -127,7 +127,7 @@ Metrics used:
 
 ---
 ### **Validation Dataset Performance: All Models**
-## Dataset 1:
+## Training Dataset 1:
 | Metric               | GPT-2  | T5    |
 |----------------------|--------|-------|
 | **BLEU Score**      | 0 | 0 |
@@ -137,11 +137,11 @@ Metrics used:
 | **Perplexity**      | 1.0974 | 1.0639e6 |
 | **BERTScore (F1)** | 0.7897 | 0.7984 |
 
-**Final Conclusions:**  
+**Conclusions:**  
 - **Performance drops significantly on validation data**, This is because the validation data is very different from the training and test datasets. While the training data contains only dreams without interpretations (and interpretations were generated manually during training), the validation data is based on interpretations according to Freud. This discrepancy makes it harder for the models to generalize effectively.
 - **T5 still performs better than GPT-2**, but the gap is smaller.
   
-## Dataset 2:
+## Training Dataset 2:
 | Metric               | GPT-2  | distilgpt2    |
 |----------------------|--------|-------|
 | **BLEU Score**      | 0.1933 | 0.0033 |
@@ -151,8 +151,11 @@ Metrics used:
 | **Perplexity**      | 24.4091 | 37.5101 |
 | **BERTScore (F1)** | 0.8246 | 0.8275 |
 
-**Final Conclusions:**  
+**Conclusions:**  
 GPT-2 consistently outperforms distilgpt2 in BLEU and Perplexity, indicating better fluency, coherence, and more confident text generation. While distilgpt2 slightly outperforms GPT-2 in ROUGE and BERTScore (F1) on the validation set, suggesting better semantic relevance and content alignment, the overall differences are minimal. Both models experience performance variations between the test and validation sets, highlighting challenges in generalizing to new data, likely due to differences in style and structure from the training data.
+
+**Final Conclusioins:**
+While all models face generalization difficulties, T5 achieves better content relevance but suffers from instability, while GPT-2 provides more fluent and coherent outputs. The validation data shift remains a major challenge, highlighting the importance of better-aligned training strategies for future improvements.
 
 ## **Citation**
 If you use this project, please cite the original dataset:
