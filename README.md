@@ -91,7 +91,7 @@ The dream dataset used in this project is available on **Dream**:
 Train GPT-2 and BERT models using the preprocessed dataset:
 
 ```bash
-python NLP_FinalProject_MPT_2.py.py
+python NLP_FinalProject_distilgpt2_2.py.py
 python NLP_FinalProject_GPT_2.py 
 ```
 
@@ -111,7 +111,7 @@ Metrics used:
 ## **Results**
 
 ### **Test Dataset Performance**
-| Metric               | GPT-2  | MPT    |
+| Metric               | GPT-2  | distilgpt2    |
 |----------------------|--------|-------|
 | **BLEU Score**      | 0.0900 | 0.0238 |
 | **ROUGE-1**        | 0.0841 | 0.0140 |
@@ -142,7 +142,7 @@ Metrics used:
 - **T5 still performs better than GPT-2**, but the gap is smaller.
   
 ## Dataset 2:
-| Metric               | GPT-2  | BERT    |
+| Metric               | GPT-2  | distilgpt2    |
 |----------------------|--------|-------|
 | **BLEU Score**      | 0.1933 | 0.5428 |
 | **ROUGE-1**        | 0.0343 | 0.0092 |
