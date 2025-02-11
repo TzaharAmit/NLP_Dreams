@@ -113,16 +113,16 @@ Metrics used:
 ### **Test Dataset Performance**
 | Metric               | GPT-2  | distilgpt2    |
 |----------------------|--------|-------|
-| **BLEU Score**      | 0.0900 | 0.0238 |
-| **ROUGE-1**        | 0.0841 | 0.0140 |
-| **ROUGE-2**        | 0.0054 | 0.0000 |
-| **ROUGE-L**        | 0.0594 | 0.0140 |
-| **Perplexity**      | 162.9869 | inf |
-| **BERTScore (F1)** | 0.8243 | 0.8536 |
+| **BLEU Score**      | 0.0900 | 0.0043 |
+| **ROUGE-1**        | 0.0841 | 0.0832 |
+| **ROUGE-2**        | 0.0054 | 0.0057 |
+| **ROUGE-L**        | 0.0594 | 0.0607 |
+| **Perplexity**      | 162.9869 | 182.7831 |
+| **BERTScore (F1)** | 0.8243 | 0.8257 |
 
 **Conclusions: Test Dataset**  
-- GPT-2 outperforms BERT in BLEU, ROUGE-1, ROUGE-2, and ROUGE-L, indicating better accuracy and relevance in generated interpretations.
-- The infinite Perplexity in BERT suggests instability in generation, while GPT-2's lower Perplexity reflects more confident outputs despite being high.
+- GPT-2 outperforms distilgpt2 in BLEU and Perplexity, indicating better fluency, coherence, and more confident text generation.
+- Both models show comparable performance in ROUGE and BERTScore, suggesting similar semantic relevance and content preservation in generated interpretations.
 
 
 ---
@@ -144,15 +144,15 @@ Metrics used:
 ## Dataset 2:
 | Metric               | GPT-2  | distilgpt2    |
 |----------------------|--------|-------|
-| **BLEU Score**      | 0.1933 | 0.5428 |
-| **ROUGE-1**        | 0.0343 | 0.0092 |
-| **ROUGE-2**        | 0.0018 | 0.0000 |
-| **ROUGE-L**        | 0.0312 | 0.0092 |
-| **Perplexity**      | 24.4091 | inf |
-| **BERTScore (F1)** | 0.8246 | 0.8654 |
+| **BLEU Score**      | 0.1933 | 0.0033 |
+| **ROUGE-1**        | 0.0343 | 0.0375 |
+| **ROUGE-2**        | 0.0018 | 0.0035 |
+| **ROUGE-L**        | 0.0312 | 0.0327 |
+| **Perplexity**      | 24.4091 | 37.5101 |
+| **BERTScore (F1)** | 0.8246 | 0.8275 |
 
 **Final Conclusions:**  
-GPT-2 consistently outperforms BERT in BLEU and ROUGE scores, indicating better accuracy and relevance in generated interpretations. While BERT shows instability with infinite Perplexity, GPT-2 demonstrates more reliable outputs despite its high Perplexity. Interestingly, BERT slightly outperforms GPT-2 in BERTScore (F1) on the test set, but GPT-2 leads on the validation set, reflecting better semantic alignment with Freud-based interpretations. Overall, both models experience a performance drop on the validation set due to its differences from the training data, which makes it harder for them to generalize effectively.
+GPT-2 consistently outperforms distilgpt2 in BLEU and Perplexity, indicating better fluency, coherence, and more confident text generation. While distilgpt2 slightly outperforms GPT-2 in ROUGE and BERTScore (F1) on the validation set, suggesting better semantic relevance and content alignment, the overall differences are minimal. Both models experience performance variations between the test and validation sets, highlighting challenges in generalizing to new data, likely due to differences in style and structure from the training data.
 
 ## **Citation**
 If you use this project, please cite the original dataset:
